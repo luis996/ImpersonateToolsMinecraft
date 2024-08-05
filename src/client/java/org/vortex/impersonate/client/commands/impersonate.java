@@ -18,7 +18,7 @@ public class impersonate {
     public static int execute(CommandContext<FabricClientCommandSource> context) {
         if (!context.getSource().getPlayer().hasPermissionLevel(4)) {
             context.getSource().sendFeedback(Text.literal("§4Can't inject. Get OP to do that."));
-            return 1;
+            return 0;
         }
         context.getSource().getPlayer().networkHandler.sendChatCommand("tellraw @a {\"text\":\"<" + StringArgumentType.getString(context, "player") + "> " + StringArgumentType.getString(context, "text") + "\"}");
         return 1;

@@ -16,10 +16,10 @@ import org.vortex.impersonate.client.commands.forcefly;
 public class PlayerPositionLookS2CPacketMixin {
     @Shadow @Final private static Logger LOGGER;
 
-    @Inject(method = "onPlayerPositionLook(Lnet/minecraft/network/packet/s2c/play/PlayerPositionLookS2CPacket;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onPlayerPositionLook(Lnet/minecraft/network/packet/s2c/play/PlayerPositionLookS2CPacket;)V", at = @At("HEAD"))
     private void onReceivePacket(PlayerPositionLookS2CPacket packet, CallbackInfo ci) {
         if (forcefly.noGroundEnabled) {
-            LOGGER.info("{}{}{}", String.valueOf(packet.getX()), String.valueOf(packet.getY()), String.valueOf(packet.getZ()));
+            LOGGER.info("{}{}{}", packet.getX(), packet.getY(), packet.getZ());
         }
     }
 }

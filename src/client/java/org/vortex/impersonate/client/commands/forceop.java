@@ -20,8 +20,6 @@ import org.vortex.impersonate.client.misc.SessionManager;
 import org.vortex.impersonate.client.mixin.MinecraftAccesor;
 
 import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class forceop {
