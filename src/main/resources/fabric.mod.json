@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "impersonate",
+  "version": "1.0.0",
+  "name": "Impersonate",
+  "description": "If having OP in a server, impersonates another member of the server using tellraw.",
+  "authors": ["Vortex"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/impersonate/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.vortex.impersonate.client.ImpersonateClient"
+    ],
+    "main": [
+      "org.vortex.impersonate.Impersonate"
+    ]
+  },
+  "mixins": [
+    "impersonate.mixins.json",
+    {
+      "config": "impersonate.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

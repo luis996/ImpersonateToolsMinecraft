@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.vortex.impersonate.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MinecraftAccesor",
+    "ClientConnectionMixin",
+    "PlayerPositionLookS2CPacketMixin",
+    "PlayerMoveC2SPacketAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
