@@ -9,6 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.world.GameMode;
 
 import java.util.Objects;
+import java.util.concurrent.Executors;
 
 
 public class forceunfly {
@@ -26,6 +27,8 @@ public class forceunfly {
         player.sendMessage(Text.literal("[!] NoFall (NoGround) Mixin: OFF"));
         Objects.requireNonNull(context.getSource().getClient().interactionManager).setGameMode(GameMode.SURVIVAL);
         forcefly.noGroundEnabled = false;
+        forcefly.scheduler.shutdownNow();
+        forcefly.scheduler = Executors.newScheduledThreadPool(1);
         return 1;
     }
 }
