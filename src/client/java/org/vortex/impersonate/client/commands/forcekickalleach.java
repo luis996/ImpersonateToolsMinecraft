@@ -19,6 +19,7 @@ import org.vortex.impersonate.client.misc.SessionManager;
 import org.vortex.impersonate.client.mixin.MinecraftAccesor;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class forcekickalleach {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
@@ -32,11 +33,11 @@ public class forcekickalleach {
         (new Thread(() -> {
             ServerInfo serverInfo = MinecraftClient.getInstance().getCurrentServerEntry();
             assert serverInfo != null;
+            Session ogSession = MinecraftClient.getInstance().getSession();
+            ClientPlayNetworkHandler handler = context.getSource().getPlayer().networkHandler;
+            handler.getConnection().disconnect(Text.literal("Kicking..."));
             playerList.forEach(playerListEntry -> {
-                Session ogSession = MinecraftClient.getInstance().getSession();
                 ImpersonateClient.LOGGER.info(playerListEntry.getProfile().getName());
-                ClientPlayNetworkHandler handler = context.getSource().getPlayer().networkHandler;
-                handler.getConnection().disconnect(Text.literal("Kicking..."));
                 MinecraftAccesor clientAccessor = (MinecraftAccesor) MinecraftClient.getInstance();
                 try {
                     Thread.sleep(10);
@@ -44,15 +45,18 @@ public class forcekickalleach {
                     throw new RuntimeException(e);
                 }
                 clientAccessor.imp$session(SessionManager.getCrackedSession(playerListEntry.getProfile().getName()));
+                GameJoinEventHelper.registerOneTimeCallback(() -> {
+                    ImpersonateClient.LOGGER.info("Should call");
+                    Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().disconnect(Text.literal("Kicked"));
+                });
                 RenderSystem.recordRenderCall(() -> ConnectScreen.connect(MinecraftClient.getInstance().currentScreen, MinecraftClient.getInstance(), ServerAddress.parse(serverInfo.address), serverInfo, true, null));
-                GameJoinEventHelper.registerOneTimeCallback(() -> handler.getConnection().disconnect(Text.literal("Kicking...")));
                 try {
-                    Thread.sleep(720);
+                    Thread.sleep(780);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                clientAccessor.imp$session(ogSession);
             });
+            ((MinecraftAccesor) MinecraftClient.getInstance()).imp$session(ogSession);
         })).start();
         return 1;
     }
