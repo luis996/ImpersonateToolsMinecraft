@@ -6,7 +6,7 @@
   "client": [
     "MinecraftAccesor",
     "ClientConnectionMixin",
-    "PlayerPositionLookS2CPacketMixin",
+    "ClientPlayNetworkHandlerMixin",
     "PlayerMoveC2SPacketAccessor"
   ],
   "injectors": {
