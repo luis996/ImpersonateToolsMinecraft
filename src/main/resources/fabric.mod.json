@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "impersonate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "Impersonate",
   "description": "If having OP in a server, impersonates another member of the server using tellraw.",
   "authors": ["Vortex"],
