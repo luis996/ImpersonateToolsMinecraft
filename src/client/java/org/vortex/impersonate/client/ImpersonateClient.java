@@ -20,6 +20,7 @@ public class ImpersonateClient implements ClientModInitializer {
             forcefly.register(dispatcher);
             forceunfly.register(dispatcher);
             forcestop.register(dispatcher, ClientPlayConnectionEvents.JOIN);
+            forcekickall.register(dispatcher, ClientPlayConnectionEvents.JOIN);
             LOGGER.info("Got it!");
         });
     }
