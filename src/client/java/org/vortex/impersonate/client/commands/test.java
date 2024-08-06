@@ -16,9 +16,7 @@ public class test {
     }
 
     public static int execute(CommandContext<FabricClientCommandSource> context) {
-        GameJoinEventHelper.registerOneTimeCallback(() -> {
-            context.getSource().getPlayer().networkHandler.sendChatMessage(StringArgumentType.getString(context, "chatMessage"));
-        });
+        GameJoinEventHelper.registerOneTimeCallback(() -> context.getSource().getPlayer().networkHandler.sendChatMessage(StringArgumentType.getString(context, "chatMessage")));
         return 1;
     }
 }

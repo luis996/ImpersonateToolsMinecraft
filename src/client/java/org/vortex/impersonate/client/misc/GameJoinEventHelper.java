@@ -13,7 +13,14 @@ public class GameJoinEventHelper {
 
     public static void executeCallbacks() {
         for (GameJoinCallback callback : oneTimeCallbacks) {
-            callback.execute();
+            (new Thread(() -> {
+                try {
+                    Thread.sleep(220);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                callback.execute();
+            })).start();
         }
         oneTimeCallbacks.clear();
     }
